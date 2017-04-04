@@ -464,7 +464,6 @@ package cyanogenmod.hardware {
     method public deprecated int getDisplayGammaCalibrationMax();
     method public deprecated int getDisplayGammaCalibrationMin();
     method public cyanogenmod.hardware.DisplayMode[] getDisplayModes();
-    method public cyanogenmod.hardware.TouchscreenGesture[] getTouchscreenGestures();
     method public static cyanogenmod.hardware.CMHardwareManager getInstance(android.content.Context);
     method public java.lang.String getLtoDestination();
     method public long getLtoDownloadInterval();
@@ -475,6 +474,7 @@ package cyanogenmod.hardware {
     method public java.lang.String getSerialNumber();
     method public int getSupportedFeatures();
     method public int getThermalState();
+    method public cyanogenmod.hardware.TouchscreenGesture[] getTouchscreenGestures();
     method public java.lang.String getUniqueDeviceId();
     method public int getVibratorDefaultIntensity();
     method public int getVibratorIntensity();
@@ -516,8 +516,8 @@ package cyanogenmod.hardware {
     field public static final int FEATURE_SUNLIGHT_ENHANCEMENT = 256; // 0x100
     field public static final deprecated int FEATURE_TAP_TO_WAKE = 512; // 0x200
     field public static final int FEATURE_THERMAL_MONITOR = 32768; // 0x8000
-    field public static final int FEATURE_TOUCH_HOVERING = 2048; // 0x800
     field public static final int FEATURE_TOUCHSCREEN_GESTURES = 524288; // 0x80000
+    field public static final int FEATURE_TOUCH_HOVERING = 2048; // 0x800
     field public static final int FEATURE_UNIQUE_DEVICE_ID = 65536; // 0x10000
     field public static final int FEATURE_VIBRATOR = 1024; // 0x400
   }
@@ -544,15 +544,6 @@ package cyanogenmod.hardware {
     method public int[] toRGB();
     method public static cyanogenmod.hardware.HSIC unflattenFrom(java.lang.String) throws java.lang.NumberFormatException;
     method public void writeToParcel(android.os.Parcel, int);
-  }
-
-  public class TouchscreenGesture implements android.os.Parcelable {
-    ctor public TouchscreenGesture(int, java.lang.String, int);
-    method public int describeContents();
-    method public void writeToParcel(android.os.Parcel, int);
-    field public final int id;
-    field public final java.lang.String name;
-    field public final int keycode;
   }
 
   public abstract interface IThermalListenerCallback implements android.os.IInterface {
@@ -643,6 +634,15 @@ package cyanogenmod.hardware {
     field public static final int STATE_UNKNOWN = -1; // 0xffffffff
     field public static final int STATE_WARM_FALLING = 1; // 0x1
     field public static final int STATE_WARM_RISING = 2; // 0x2
+  }
+
+  public class TouchscreenGesture implements android.os.Parcelable {
+    ctor public TouchscreenGesture(int, java.lang.String, int);
+    method public int describeContents();
+    method public void writeToParcel(android.os.Parcel, int);
+    field public final int id;
+    field public final int keycode;
+    field public final java.lang.String name;
   }
 
 }
@@ -1137,6 +1137,7 @@ package cyanogenmod.providers {
     method public static boolean putLong(android.content.ContentResolver, java.lang.String, long);
     method public static boolean putString(android.content.ContentResolver, java.lang.String, java.lang.String);
     field public static final android.net.Uri CONTENT_URI;
+    field public static final java.lang.String NETWORK_TRAFFIC_HIDEARROW = "network_traffic_hidearrow";
     field public static final java.lang.String SYS_PROP_CM_SETTING_VERSION = "sys.cm_settings_secure_version";
   }
 
